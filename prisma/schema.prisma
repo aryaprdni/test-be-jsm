@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  email String @id @db.VarChar(100)
+  username String? @db.VarChar(100)
+  full_name String? @db.VarChar(100)
+  password String @db.VarChar(100)
+  phone_number Int?
+  token String?
+
+  t_level T_Level @relation(fields: [t_level_id], references: [id])
+  t_level_id Int @unique
+
+  t_department T_Department @relation(fields: [t_department_id], references: [id])
+  t_department_id Int
+
+  @@map("users")
+}
+
+model T_Level {
+  id Int @id @default(autoincrement())
+  level_name String @db.VarChar(100)
+  User User?
+
+  @@map("t_levels")
+}
+
+model T_Department {
+  id Int @id @default(autoincrement())
+  department_name String @db.VarChar(100)
+
+  user User[]
+
+  @@map("t_departments")
+}
+
+
