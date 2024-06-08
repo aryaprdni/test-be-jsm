@@ -36,6 +36,8 @@ export type UpdateUserRequest = {
     full_name?: string;
     password?: string;
     phone_number?: number;
+    t_level_id?: number;
+    t_department_id?: number;
 }
 
 export function toUserResponse(user: User, t_level: T_Level, t_department: T_Department): UserResponse {

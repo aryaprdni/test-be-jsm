@@ -1,6 +1,6 @@
 # How to use this API using Postman
-1. Run the server in visual studio code **npm run dev**
-2. Run the apache and MySQL in **XAMPP**
+1. Run the apache and MySQL in **XAMPP**
+2. Run the server in visual studio code **npm start**
 
 ## How to use authorization
 1. Click tab authorization on postman
@@ -21,7 +21,9 @@ Request Body :
     "username" : "arya",
     "full_name" : "aryaperdanairawan",
     "password" : "rahasiabanget",
-    "phone_number": "911"
+    "phone_number": "911",
+    "t_level_id" : 2,
+    "t_department_id" : 1
 }
 ```
 
@@ -34,6 +36,14 @@ Response Body (Success) :
         "username" : "arya",
         "full_name" : "aryaperdanairawan",
         "phone_number" : "911"
+    },
+    "t_level": {
+      "id": 2,
+      "level_name": "Intern"
+    },
+    "t_Department": {
+      "id": 1,
+      "department_name": "Finance"
     }
 }
 ```
@@ -70,7 +80,15 @@ Response Body (Success) :
         "username" : "arya",
         "full_name" : "aryaperdanairawan",
         "phone_number" : "911",
-        "token" : "jwttoken"
+        "token" : "jwttoken",
+        "t_level":  {
+          "id": 2,
+          "level_name": "Intern"
+        },
+        "t_Department": {
+          "id": 1,
+          "department_name": "Finance"
+        }
     }
 }
 ```
@@ -110,7 +128,15 @@ Request Body (Sucess) :
     "username" : "arya",
     "full_name" : "aryaperdanairawan",
     "phone_number" : "911",
-    "token" : "jwttoken"
+    "token" : "jwttoken",
+    "t_level" : {
+      "id": 2,
+      "level_name": "Intern"
+    },
+    "t_Department": {
+      "id": 1,
+      "department_name": "Finance"
+    }
 }
 ```
 
@@ -137,7 +163,15 @@ Request Body (Sucess) :
     "username" : "arya",
     "full_name" : "aryaperdanairawan",
     "phone_number" : "911",
-    "token" : "jwttoken"
+    "token" : "jwttoken",
+    "t_level": {
+      "id": 2,
+      "level_name": "Intern"
+    },
+    "t_Department": {
+      "id": 1,
+      "department_name": "Finance"
+    }
 }
 ```
 
@@ -164,7 +198,15 @@ Response Body (Success) :
     "username" : "arya",
     "full_name" : "aryaperdanairawan",
     "phone_number" : "911",
-    "token" : "jwttoken"
+    "token" : "jwttoken",
+    "t_level": {
+      "id": 2,
+      "level_name": "Intern"
+    },
+    "t_Department": {
+      "id": 1,
+      "department_name": "Finance"
+    }
 }
 ```
 
@@ -192,7 +234,15 @@ Response Body (Success) :
     "username" : "arya",
     "full_name" : "aryaperdanairawan",
     "phone_number" : "911",
-    "token" : "jwttoken"
+    "token" : "jwttoken",
+    "t_level": {
+      "id": 2,
+      "level_name": "Intern"
+    },
+    "t_Department": {
+      "id": 1,
+      "department_name": "Finance"
+    }
   }
 }
 ```
@@ -219,14 +269,18 @@ Response Body (Success) :
         "username" : "arya",
         "full_name" : "aryaperdanairawan",
         "phone_number" : "911",
-        "token" : "jwttoken"
+        "token" : "jwttoken",
+        "t_level_id": 2,
+        "t_department_id": 1
     },
     {
         "email" : "aryaemail2@gmail.com",
         "username" : "arya2",
         "full_name" : "aryaperdanairawan2",
         "phone_number" : "9112",
-        "token" : "jwttoken2"
+        "token" : "jwttoken2",
+        "t_level_id": 2,
+        "t_department_id": 1
     },
   ]
 }

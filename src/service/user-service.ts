@@ -144,6 +144,10 @@ export class UserService {
         const existingUser = await prismaClient.user.findUnique({
             where: {
                 email: user.email
+            },
+            include: {
+                t_level: true,
+                t_department: true
             }
         });
     
@@ -151,37 +155,41 @@ export class UserService {
             throw new Error('User not found');
         }
     
+        const dataToUpdate: any = {};
+    
         if (updateRequest.email) {
-            existingUser.email = updateRequest.email;
+            dataToUpdate.email = updateRequest.email;
         }
     
         if (updateRequest.username) {
-            existingUser.username = updateRequest.username;
+            dataToUpdate.username = updateRequest.username;
         }
     
         if (updateRequest.full_name) {
-            existingUser.full_name = updateRequest.full_name;
+            dataToUpdate.full_name = updateRequest.full_name;
         }
     
         if (updateRequest.password) {
-            existingUser.password = await bcrypt.hash(updateRequest.password, 10);
+            dataToUpdate.password = await bcrypt.hash(updateRequest.password, 10);
         }
     
         if (updateRequest.phone_number) {
-            existingUser.phone_number = updateRequest.phone_number;
+            dataToUpdate.phone_number = updateRequest.phone_number;
+        }
+    
+        if (updateRequest.t_level_id) {
+            dataToUpdate.t_level = { connect: { id: updateRequest.t_level_id } };
+        }
+    
+        if (updateRequest.t_department_id) {
+            dataToUpdate.t_department = { connect: { id: updateRequest.t_department_id } };
         }
     
         const result = await prismaClient.user.update({
             where: {
                 email: user.email 
             },
-            data: {
-                email: existingUser.email,
-                username: existingUser.username,
-                full_name: existingUser.full_name,
-                password: existingUser.password,
-                phone_number: existingUser.phone_number
-            },
+            data: dataToUpdate,
             include: {
                 t_level: true,
                 t_department: true
@@ -190,6 +198,7 @@ export class UserService {
     
         return toUserResponse(result, result.t_level!, result.t_department!);
     }
+    
     
 
     static async delete(user: User): Promise<UserResponse> {
